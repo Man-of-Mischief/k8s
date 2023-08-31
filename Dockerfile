@@ -1,12 +1,12 @@
 FROM python:3.8-alpine
 
-ENV USER nidhin
-
 ENV DOCROOT /home/nidhin
 
-ENV PORT 8000
+ENV PORT 3000
 
-RUN adduser -h $DOCROOT -D -s /bin/ash nidhin
+ENV USER nidhin
+
+RUN adduser -h $DOCROOT -D -s /bin/sh $USER
 
 WORKDIR /app
 
@@ -18,7 +18,7 @@ RUN chown -R $USER:$USER $DOCROOT
 
 RUN apk update
 
-RUN apk add python3 py3-pip --no-cache
+RUN apk add python3 py3-pip --no-cache 
 
 RUN pip3 install -r requirements.txt
 
