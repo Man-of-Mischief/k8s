@@ -1,16 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: webapp
+  name: webapp-deployment
 spec:
   selector:
     matchLabels:
-      app: webapp
+      app: app-flaskapp
+      project: zenda
   replicas: 2
   template:
     metadata:
       labels:
-        app: webapp
+        app: app-flaskapp
+        project: zenda
     spec:
       containers:
       - name: webapp
