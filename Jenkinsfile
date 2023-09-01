@@ -32,10 +32,9 @@ pipeline {
         stage('Deploy to Minikube') {
             steps {
                 script {
-                    
-                    // Apply your Kubernetes deployment and service YAML files
-                    sh 'kubectl apply -f deployment.yaml'
-                    sh 'kubectl apply -f service.yaml'
+            
+                   sh 'kubectl config view'
+
                 }
             }
         }
