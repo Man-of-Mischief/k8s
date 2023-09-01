@@ -11,8 +11,9 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    def dockerImage // Declare dockerImage variable at the global scope
-                    dockerImage = docker.build("nidhinb143/webapp:latest")
+                    def dockerImage = docker.build("nidhinb143/webapp:latest")
+                    // Store the Docker image ID for later use
+                    dockerImageId = dockerImage.id
                 }
             }
         }
@@ -21,7 +22,8 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'nidhinb143') {
-                        dockerImage.push('latest')
+                        // Use the Docker image ID previously stored
+                        docker.image(dockerImageId).push('latest')
                     }
                 }
             }
