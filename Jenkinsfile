@@ -1,23 +1,25 @@
 pipeline {
     agent any
 
-    environment {
-        DOCKER_CREDENTIALS = credentials('nidhinb143')
-        DOCKER_IMAGE_NAME = 'nidhinb143/webapp:latest'
-    }
-
     stages {
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
+        
         stage('Build Docker Image') {
             steps {
                 script {
-                    def docker = tool name: 'Docker', type: 'Tool'
-                    def dockerImage = docker.build(DOCKER_IMAGE_NAME, '.')
-                    dockerImage.withRegistry([credentialsId: DOCKER_CREDENTIALS, url: 'docker']) {
+                    def dockerImage = docker.build('nidhinb143/webapp:${BUILD_NUMBER}')
+                }
+            }
+        }
+        
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'nidhinb143') {
                         dockerImage.push()
                     }
                 }
