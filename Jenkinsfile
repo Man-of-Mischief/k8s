@@ -11,7 +11,9 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    def dockerImage = docker.build('nidhinb143/webapp:${BUILD_NUMBER}')
+                    // Use a valid tag format, e.g., 'v1', '1.0', or use a dynamic value
+                    def dockerTag = 'v1'
+                    def dockerImage = docker.build("nidhinb143/webapp:${dockerTag}")
                 }
             }
         }
@@ -20,7 +22,9 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'nidhinb143') {
-                        dockerImage.push()
+                        // Use the same valid tag format here
+                        def dockerTag = 'v1'
+                        dockerImage.push("${dockerTag}")
                     }
                 }
             }
