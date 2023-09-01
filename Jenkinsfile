@@ -37,12 +37,18 @@ pipeline {
             steps {
                 script {
 
-                    sh 'kubectl config set-cluster minikube --server=https://127.0.0.1:8443 --insecure-skip-tls-verify=true'
-                    sh 'kubectl config set-context minikube --cluster=minikube --user=minikube'
+                    // sh 'kubectl config set-cluster minikube --server=https://127.0.0.1:8443 --insecure-skip-tls-verify=true'
+                    // sh 'kubectl config set-context minikube --cluster=minikube --user=minikube'
+                    // sh 'kubectl config use-context minikube'
+                    // sh 'kubectl --kubeconfig=${KUBECONFIG} apply -f deployment.yaml'
+                    // sh 'kubectl --kubeconfig=${KUBECONFIG} apply -f service.yaml'
+
                     sh 'kubectl config use-context minikube'
-                    sh 'kubectl --kubeconfig=${KUBECONFIG} apply -f deployment.yaml'
-                    sh 'kubectl --kubeconfig=${KUBECONFIG} apply -f service.yaml'
-                    // sh 'kubectl config get-contexts'
+
+                    // Apply the Kubernetes manifest files for deployment and service
+                    sh 'kubectl apply -f deployment.yaml'
+                    sh 'kubectl apply -f service.yaml'
+
                 }
             }
         }
