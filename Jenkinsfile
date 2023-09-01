@@ -36,8 +36,8 @@ pipeline {
                     sh 'kubectl config use-context minikube'
                     
                     // Apply your Kubernetes deployment and service YAML files
-                    sh 'kubectl apply -f your-deployment-yaml.yaml'
-                    sh 'kubectl apply -f your-service-yaml.yaml'
+                    sh 'kubectl apply -f deployment.yaml'
+                    sh 'kubectl apply -f service.yaml'
                 }
             }
         }
