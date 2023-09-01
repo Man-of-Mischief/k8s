@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        DOCKER_IMAGE = "" // Define a global environment variable for the Docker image
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -11,8 +15,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    def dockerImage // Declare dockerImage variable at the global scope
-                    dockerImage = docker.build("nidhinb143/webapp:latest")
+                    DOCKER_IMAGE = "nidhinb143/webapp:latest" // Set the Docker image as an environment variable
+                    docker.build(DOCKER_IMAGE)
                 }
             }
         }
