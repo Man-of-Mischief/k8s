@@ -32,8 +32,6 @@ pipeline {
         stage('Deploy to Minikube') {
             steps {
                 script {
-                    // Set the kubectl context to Minikube
-                    sh 'kubectl config use-context minikube'
                     
                     // Apply your Kubernetes deployment and service YAML files
                     sh 'kubectl apply -f deployment.yaml'
