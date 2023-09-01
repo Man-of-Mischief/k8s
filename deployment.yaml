@@ -19,3 +19,4 @@ spec:
         image: nidhinb143/webapp:latest
         ports:
         - containerPort: 3000
+        imagePullPolicy: Always
