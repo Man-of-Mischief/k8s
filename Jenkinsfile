@@ -24,7 +24,7 @@ pipeline {
                     // Use the same valid tag format here
                     def dockerTag = 'v1'
                     docker.withRegistry('https://registry.hub.docker.com', 'nidhinb143') {
-                        dockerImage.push("${dockerTag}")
+                        dockerImage.push()
                     }
                 }
             }
