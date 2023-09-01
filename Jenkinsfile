@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        KUBECONFIG = '/var/lib/jenkins/workspace/Python\ Application/.kube/config'
+        KUBECONFIG = '/var/lib/jenkins/workspace/Python Application/.kube/config'
     }
 
     stages {
