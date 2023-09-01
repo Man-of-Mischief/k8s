@@ -11,7 +11,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    def dockerImage = docker.build("nidhinb143/webapp:latest")
+                    def dockerImage // Declare dockerImage variable at the global scope
+                    dockerImage = docker.build("nidhinb143/webapp:latest")
                 }
             }
         }
