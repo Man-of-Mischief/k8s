@@ -32,7 +32,7 @@ pipeline {
         stage('Deploy to Minikube') {
             steps {
                 script {
-                    sh 'kubectl config set-cluster minikube --server=http://127.0.0.1:8443 --insecure-skip-tls-verify=true'
+                    sh 'kubectl config set-cluster minikube --server=https://127.0.0.1:8443 --insecure-skip-tls-verify=true'
                     sh 'kubectl config set-context minikube --cluster=minikube --user=minikube'
                     sh 'kubectl config use-context minikube'
                     sh 'kubectl apply -f deployment.yaml'
