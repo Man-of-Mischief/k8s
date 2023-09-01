@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_CREDENTIALS = credentials('docker-credentials')
+        DOCKER_CREDENTIALS = credentials('nidhinb143')
         DOCKER_IMAGE_NAME = 'nidhinb143/webapp:latest'
     }
 
