@@ -15,11 +15,11 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: DOCKER_CREDENTIALS, passwordVariable: 'DOCKER_PASSWORD')]) {
-                        def dockerImage = docker.build(DOCKER_IMAGE_NAME, '.')
-                        docker.withRegistry('', 'docker') {
-                            dockerImage.push()
-                        }
+                    // Ensure Docker is properly configured in the agent environment
+                    def docker = tool name: 'docker', type: 'Tool'
+                    def dockerImage = docker.build(DOCKER_IMAGE_NAME, '.')
+                    dockerImage.withRegistry([credentialsId: DOCKER_CREDENTIALS, url: 'docker']) {
+                        dockerImage.push()
                     }
                 }
             }
