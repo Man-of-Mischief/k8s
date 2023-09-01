@@ -15,9 +15,11 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    def dockerImage = docker.build(DOCKER_IMAGE_NAME, '.')
-                    dockerImage.withRegistry([credentialsId: DOCKER_CREDENTIALS, url: 'docker']) {
-                        dockerImage.push()
+                    withCredentials([usernamePassword(credentialsId: DOCKER_CREDENTIALS, passwordVariable: 'DOCKER_PASSWORD')]) {
+                        def dockerImage = docker.build(DOCKER_IMAGE_NAME, '.')
+                        docker.withRegistry('', 'docker') {
+                            dockerImage.push()
+                        }
                     }
                 }
             }
