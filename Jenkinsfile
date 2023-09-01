@@ -29,12 +29,17 @@ pipeline {
             }
         }
         
+        stage('Copy Kubernetes Config') {
+            steps {
+                sh 'cp ~/.kube/config /var/lib/jenkins/.kube/config'
+            }
+        }
+
         stage('Deploy to Minikube') {
             steps {
                 script {
-            
-                   sh 'kubectl config view'
-
+                    sh 'kubectl config use-context minikube'
+                    sh 'kubectl apply -f deployment.yaml'
                 }
             }
         }
