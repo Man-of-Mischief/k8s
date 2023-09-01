@@ -15,8 +15,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Ensure Docker is properly configured in the agent environment
-                    def docker = tool name: 'docker', type: 'Tool'
+                    def docker = tool name: 'Docker', type: 'Tool'
                     def dockerImage = docker.build(DOCKER_IMAGE_NAME, '.')
                     dockerImage.withRegistry([credentialsId: DOCKER_CREDENTIALS, url: 'docker']) {
                         dockerImage.push()
