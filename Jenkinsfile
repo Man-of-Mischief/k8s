@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        KUBECONFIG = '/var/lib/jenkins/.kube/config'
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -39,7 +35,7 @@ pipeline {
 
                     sh 'kubectl config set-cluster minikube --server=https://127.0.0.1:8443 --insecure-skip-tls-verify=true'
                     sh 'kubectl config set-context minikube --cluster=minikube --user=minikube'
-                    sh 'kubectl config --kubeconfig=${KUBECONFIG} use-context minikube'
+                    sh 'kubectl config use-context minikube'
                     sh 'kubectl apply -f deployment.yaml'
                     sh 'kubectl apply -f service.yaml'
                 }
