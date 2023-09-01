@@ -21,9 +21,9 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'nidhinb143') {
-                        // Use the same valid tag format here
-                        def dockerTag = 'v1'
+                    // Use the same valid tag format here
+                    def dockerTag = 'v1'
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker-credentials-id') {
                         dockerImage.push("${dockerTag}")
                     }
                 }
