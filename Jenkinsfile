@@ -33,7 +33,7 @@ pipeline {
             steps {
                 script {
                     sh 'kubectl apply -f deployment.yaml --kubeconfig=/var/k8s/config'
-                    sh 'kubectl apply -f /home/ec2-user/Task/Tasks/service.yaml'
+                    sh 'kubectl apply -f service.yaml --kubeconfig=/var/k8s/config'
                 }
             }
         }
