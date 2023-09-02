@@ -33,6 +33,10 @@ pipeline {
             steps {
                 script {
 
+                    def clientCertPath = '/var/k8s/client.crt'
+                    def clientKeyPath = '/var/k8s/client.key'
+                    def caCertPath = '/var/k8s/ca.crt'
+
                     // def kubeconfigPath = "/home/ec2-user/.kube/config"
 
                     // sh 'kubectl config set-context minikube --cluster=minikube --user=minikube'
