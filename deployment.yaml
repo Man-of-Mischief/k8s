@@ -8,6 +8,8 @@ spec:
       app: app-flaskapp
       project: zenda
   replicas: 3
+  strategy:
+      type: Recreate
   template:
     metadata:
       labels:
@@ -20,4 +22,3 @@ spec:
         ports:
         - containerPort: 3000
         imagePullPolicy: Always
-        
