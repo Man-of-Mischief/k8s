@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        KUBECONFIG = '/var/k8s/config'  // Specify the path to your new Kubernetes config file
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -44,7 +40,7 @@ pipeline {
                     // sh 'kubectl --kubeconfig=${kubeconfigPath} apply -f deployment.yaml'
                     // sh 'kubectl apply -f service.yaml'
 
-                    sh 'kubectl apply -f /home/ec2-user/Task/Tasks/deployment.yaml'
+                    sh 'kubectl apply -f /home/ec2-user/Task/Tasks/deployment.yaml --kubeconfig=/var/k8s/config'
                     // sh 'kubectl apply -f /home/ec2-user/Task/Tasks/service.yaml'
                 }
             }
