@@ -32,16 +32,8 @@ pipeline {
         stage('Deploy to Minikube') {
             steps {
                 script {
-
-                    // def kubeconfigPath = "/home/ec2-user/.kube/config"
-
-                    // sh 'kubectl config set-context minikube --cluster=minikube --user=minikube'
-                    // sh 'kubectl config use-context minikube'
-                    // sh 'kubectl --kubeconfig=${kubeconfigPath} apply -f deployment.yaml'
-                    // sh 'kubectl apply -f service.yaml'
-
                     sh 'kubectl apply -f deployment.yaml --kubeconfig=/var/k8s/config'
-                    // sh 'kubectl apply -f /home/ec2-user/Task/Tasks/service.yaml'
+                    sh 'kubectl apply -f /home/ec2-user/Task/Tasks/service.yaml'
                 }
             }
         }
