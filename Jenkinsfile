@@ -40,8 +40,8 @@ pipeline {
                     // sh 'kubectl --kubeconfig=${kubeconfigPath} apply -f deployment.yaml'
                     // sh 'kubectl apply -f service.yaml'
 
-                    def kubeconfigPath = "/home/ec2-user/.kube/config"
-                    sh "cat ${kubeconfigPath}"
+                    sh 'kubectl apply -f /home/ec2-user/Task/Tasks/deployment.yaml'
+                    sh 'kubectl apply -f /home/ec2-user/Task/Tasks/service.yaml'
                 }
             }
         }
