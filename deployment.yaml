@@ -8,6 +8,11 @@ spec:
       app: app-flaskapp
       project: zenda
   replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1  # Maximum number of additional pods during an update
+      maxUnavailable: 1
   template:
     metadata:
       labels:
