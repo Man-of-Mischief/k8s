@@ -32,7 +32,7 @@ pipeline {
         stage('Deploy to Minikube') {
             steps {
                 script {
-                    sh 'kubectl rollout restart deployment deployment --kubeconfig=/var/k8s/config'
+                    sh 'kubectl rollout restart deployment deployment.yaml --kubeconfig=/var/k8s/config'
                     sh 'kubectl apply -f deployment.yaml --kubeconfig=/var/k8s/config'
                     sh 'kubectl apply -f service.yaml --kubeconfig=/var/k8s/config'
                 }
