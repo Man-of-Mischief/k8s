@@ -33,8 +33,8 @@ pipeline {
             steps {
                 script {
                     sh "kubectl rollout restart deployment webapp-deployment --kubeconfig=/var/k8s/config"
-                    sh 'kubectl apply -f deployment.yaml --kubeconfig=/var/k8s/config'
-                    sh 'kubectl apply -f service.yaml --kubeconfig=/var/k8s/config'
+                    // sh 'kubectl apply -f deployment.yaml --kubeconfig=/var/k8s/config'
+                    // sh 'kubectl apply -f service.yaml --kubeconfig=/var/k8s/config'
                 }
             }
         }
