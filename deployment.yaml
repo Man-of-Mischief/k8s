@@ -11,8 +11,8 @@ spec:
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 1  # Maximum number of additional pods during an update
-      maxUnavailable: 1
+      maxSurge: 2  # Maximum number of additional pods during an update
+      maxUnavailable: 2
   template:
     metadata:
       labels:
