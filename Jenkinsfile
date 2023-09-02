@@ -13,8 +13,12 @@ pipeline {
                 script {
                     def customTag = "webapp-${env.BUILD_NUMBER}"
                     def dockerImage = docker.build("nidhinb143/${customTag}")
+                    def sourceImage = "nidhinb143/${customTag}"
+                    def targetImage = "nidhinb143/webapp:${customTag}"
+                    
                     // Tag the image correctly
-                    dockerImage.tag("nidhinb143/webapp:${customTag}")
+                    docker.tag(sourceImage, targetImage)
+                    
                     // Store the Docker image ID for later use
                     dockerImageId = dockerImage.id
                 }
@@ -25,9 +29,11 @@ pipeline {
             steps {
                 script {
                     def customTag = "webapp-${env.BUILD_NUMBER}"
+                    def targetImage = "nidhinb143/webapp:${customTag}"
+                    
                     docker.withRegistry('https://registry.hub.docker.com', 'nidhinb143') {
                         // Use the tagged Docker image for pushing
-                        docker.image("nidhinb143/webapp:${customTag}").push()
+                        docker.image(targetImage).push()
                     }
                 }
             }
