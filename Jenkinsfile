@@ -7,7 +7,7 @@ pipeline {
                 checkout scm
             }
         }
-
+        
         stage('Build Docker Image') {
             steps {
                 script {
@@ -17,7 +17,7 @@ pipeline {
                 }
             }
         }
-
+        
         stage('Push Docker Image') {
             steps {
                 script {
@@ -29,10 +29,12 @@ pipeline {
             }
         }
 
-        stage('Update Deployment Image') {
+        stage('Deploy to Minikube') {
             steps {
                 script {
-                    sh "kubectl set image deployment/webapp-deployment webapp=nidhinb143/webapp:latest --kubeconfig=/var/k8s/config"
+                    sh "kubectl set image deployment/webapp-deployment your-container-name=nidhinb143/webapp:latest --kubeconfig=/var/k8s/config"
+                    sh 'kubectl apply -f deployment.yaml --kubeconfig=/var/k8s/config'
+                    sh 'kubectl apply -f service.yaml --kubeconfig=/var/k8s/config'
                 }
             }
         }
