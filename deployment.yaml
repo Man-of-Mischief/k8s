@@ -8,8 +8,10 @@ spec:
       app: app-flaskapp
       project: zenda
   replicas: 3
-  strategy:
-      type: Recreate
+  type: RollingUpdate 
+    rollingUpdate:
+      maxSurge: 50%  # Maximum number or percentage of pods that can be added
+      maxUnavailable: 50%  # Maximum number or percentage of pods that can be unavailable
   template:
     metadata:
       labels:
