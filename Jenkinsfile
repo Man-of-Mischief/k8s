@@ -32,11 +32,14 @@ pipeline {
         stage('Deploy to Minikube') {
             steps {
                 script {
+
+                    def kubeconfigPath = "/home/ec2-user/.kube/config"
+
                     sh 'kubectl config set-cluster minikube --server=https://127.0.0.1:8443 --insecure-skip-tls-verify=true'
                     sh 'kubectl config set-context minikube --cluster=minikube --user=minikube'
                     sh 'kubectl config use-context minikube'
-                    sh 'kubectl --kubeconfig=/home/ec2-user/.kube/config apply -f deployment.yaml'
-                    // sh 'kubectl apply -f service.yaml'
+                    sh 'sudo kubectl --kubeconfig=${kubeconfigPath} apply -f deployment.yaml'
+                    sh 'sudo kubectl apply -f service.yaml'
                 }
             }
         }
